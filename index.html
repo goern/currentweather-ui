@@ -1,120 +1,165 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Hello currentweather!</title>
+  <title>Hello currentweather!</title>
 
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-    <script src="patternfly/js/patternfly.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="patternfly/js/patternfly.min.js"></script>
 
-    <link rel="stylesheet" href="patternfly/css/patternfly.min.css" />
-    <link rel="stylesheet" href="patternfly/css/patternfly-additions.min.css" />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
+  <link rel="stylesheet" href="patternfly/css/patternfly.min.css" />
+  <link rel="stylesheet" href="patternfly/css/patternfly-additions.min.css" />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
 
 <body class="cards-pf">
+  <nav class="navbar navbar-default navbar-pf" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/patternfly/img/brand.svg" alt="PatternFly Enterprise Application" />
+      </a>
+    </div>
+  </nav>
 
-    <div class="container-fluid container-cards-pf">
-      <h1> The current weather in: </h1>
-      <div class="row row-cards-pf">
-      <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
-            <h2 id="weather-1-location" class="card-pf-title" style="height: 17px;"></h2>
-            <div class="card-pf-body" style="height: 50px;">
-              <p class="card-pf-aggregate-status-notifications">
-                <span id="weather-1-description"></span></br>
-                <!-- todo include icon <span class="pficon pficon-error-circle-o"> --></span><span class="card-pf-aggregate-status-notification" id="weather-1-temperature"></span>
-                <span class="card-pf-aggregate-status-notification" id="weather-1-wind"></span>
-              </p>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8 col-md-9">
+        <div class="page-header page-header-bleed-right">
+          <div class="actions pull-right">
+            <a href="#" id="refresh"><span class="pficon pficon-refresh"></span> Refresh Results</a>
           </div>
+          <h1>Currentweather</h1>
         </div>
-        
-        <div class="col-xs-6 col-sm-4 col-md-2">
-          <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
-            <h2 id="weather-2-location" class="card-pf-title" style="height: 17px;"> </h2>
-            <div class="card-pf-body" style="height: 50px;">
-              <p class="card-pf-aggregate-status-notifications">
-                <span id="weather-2-description"></span></br>
-                <span class="card-pf-aggregate-status-notification" id="weather-2-temperature"></span>
-                <span class="card-pf-aggregate-status-notification" id="weather-2-wind"></span>
-              </p>
+
+        <div class="container-fluid container-cards-pf">
+          <div class="row row-cards-pf">
+            <!-- Important:  if you need to nest additional .row within a .row.row-cards-pf, do *not* use .row-cards-pf on the nested .row  -->
+            <div class="col-xs-6 col-sm-4 col-md-2">
+              <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
+                <h2 id="weather-1-location" class="card-pf-title" style="height: 17px;"></h2>
+                <div class="card-pf-body" style="height: 50px;">
+                  <p class="card-pf-aggregate-status-notifications">
+                    <span id="weather-1-description"></span></br>
+                    <!-- todo include icon <span class="pficon pficon-error-circle-o"> --></span><span class="card-pf-aggregate-status-notification" id="weather-1-temperature"></span>
+                    <span class="card-pf-aggregate-status-notification" id="weather-1-wind"></span>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        
-       <div class="col-xs-6 col-sm-4 col-md-2">
-          <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
-            <h2 id="weather-3-location" class="card-pf-title" style="height: 17px;"></h2>
-            <div class="card-pf-body" style="height: 50px;">
-              <p class="card-pf-aggregate-status-notifications">
-                <span id="weather-3-description"></span></br>
-                <span class="card-pf-aggregate-status-notification" id="weather-3-temperature"></span>
-                <span class="card-pf-aggregate-status-notification" id="weather-3-wind"></span>
-              </p>
+
+            <div class="col-xs-6 col-sm-4 col-md-2">
+              <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
+                <h2 id="weather-2-location" class="card-pf-title" style="height: 17px;"> </h2>
+                <div class="card-pf-body" style="height: 50px;">
+                  <p class="card-pf-aggregate-status-notifications">
+                    <span id="weather-2-description"></span></br>
+                    <span class="card-pf-aggregate-status-notification" id="weather-2-temperature"></span>
+                    <span class="card-pf-aggregate-status-notification" id="weather-2-wind"></span>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-2">
+              <div class="card-pf card-pf-accented card-pf-aggregate-status" style="height: 89px;">
+                <h2 id="weather-3-location" class="card-pf-title" style="height: 17px;"></h2>
+                <div class="card-pf-body" style="height: 50px;">
+                  <p class="card-pf-aggregate-status-notifications">
+                    <span id="weather-3-description"></span></br>
+                    <span class="card-pf-aggregate-status-notification" id="weather-3-temperature"></span>
+                    <span class="card-pf-aggregate-status-notification" id="weather-3-wind"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- /row -->
+
+          </div><!-- /container -->
         </div>
-      
-      <!-- /row -->
-
-    </div><!-- /container -->
-
- 
-
+      </div><!-- col -->
+      <div class="col-sm-4 col-md-3 sidebar-pf sidebar-pf-right">
+        <div class="sidebar-header sidebar-header-bleed-left sidebar-header-bleed-right">
+          <h2 class="h2">News</h2>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <h3 class="list-group-item-heading">Currentweather-UI</h3>
+            <p class="list-group-item-text">You are looking at a Patternfly based <a href="https://github.com/luebken/currentweather-ui">UI for currentweather</a>.</p>
+          </li>
+          <li class="list-group-item">
+            <h3 class="list-group-item-heading">Currentweather</h3>
+            <p class="list-group-item-text">Currentweather is a containerized multi tier application to get some weather information from <a href="http://openweathermap.org/">openweathermap</a>.</p>
+          </li>
+        </ul>
+      </div><!-- col -->
+    </div>
+  </div>
 
 <script type="text/javascript">
-
 var matchHeights = function() {
-          // matchHeight the contents of each .card-pf and then the .card-pf itself
-        $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
-        $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
-        $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
-        $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
-        // initialize tooltips
-        $('[data-toggle="tooltip"]').tooltip();
+  // matchHeight the contents of each .card-pf and then the .card-pf itself
+  $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
+  $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-body").matchHeight();
+  $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
+  $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
+  // initialize tooltips
+  $('[data-toggle="tooltip"]').tooltip();
 }
 
+var refreshDisplayedData = function() {
+  matchHeights();
+
+  $.getJSON('http://localhost:1337/status/Bonn,DE', function (data) {
+    $('#weather-1-location').text(data.location);
+    $('#weather-1-description').text(data.description);
+    $('#weather-1-wind').text(data.wind + " km/h");
+    $('#weather-1-temperature').text(data.temperature + " °C");
+    matchHeights();
+  });
+
+  $.getJSON('http://localhost:1337/status/Boston,USA', function (data) {
+    $('#weather-2-location').text(data.location);
+    $('#weather-2-description').text(data.description);
+    $('#weather-2-wind').text(data.wind + " km/h");
+    $('#weather-2-temperature').text(data.temperature + " °C");
+    matchHeights();
+  });
+
+  $.getJSON('http://localhost:1337/status/Paris,FR', function (data) {
+    $('#weather-3-location').text(data.location);
+    $('#weather-3-description').text(data.description);
+    $('#weather-3-wind').text(data.wind + " km/h");
+    $('#weather-3-temperature').text(data.temperature + " °C");
+    matchHeights();
+  });
+
+}
+
+$("#refresh").click(function() {
+  refreshDisplayedData();
+});
+
 $(document).ready(function () {
- matchHeights()
-    
-    $.getJSON('http://localhost:1337/status/Bonn,DE', function (data) {
-      $('#weather-1-location').text(data.location);
-      $('#weather-1-description').text(data.description);
-      $('#weather-1-wind').text(data.wind + " km/h");
-      $('#weather-1-temperature').text(data.temperature + " °C");
-      matchHeights()
-    });
-
-    $.getJSON('http://localhost:1337/status/Boston,USA', function (data) {
-      $('#weather-2-location').text(data.location);
-      $('#weather-2-description').text(data.description);
-      $('#weather-2-wind').text(data.wind + " km/h");
-      $('#weather-2-temperature').text(data.temperature + " °C");
-      matchHeights()
-    });
-
-    $.getJSON('http://localhost:1337/status/Paris,FR', function (data) {
-      $('#weather-3-location').text(data.location);
-      $('#weather-3-description').text(data.description);
-      $('#weather-3-wind').text(data.wind + " km/h");
-      $('#weather-3-temperature').text(data.temperature + " °C");
-      matchHeights()
-    });
-
+  refreshDisplayedData();
 });
 </script>
 
