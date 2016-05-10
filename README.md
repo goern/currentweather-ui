@@ -1,7 +1,7 @@
 # currentweather-ui
 A UI for the infamous currentweather backend
 
-![](ScreenShot.png)
+![](Currentweather-OSE.png)
 
 ## backend
 
