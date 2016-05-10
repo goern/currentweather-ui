@@ -1,3 +1,3 @@
-FROM rhscl_beta/nginx-18-rhel7
+FROM goern/nginx-18-centos7
 
 COPY . /usr/share/nginx/html
