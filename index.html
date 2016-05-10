@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <img src="/patternfly/img/brand.svg" alt="PatternFly Enterprise Application" />
+        ACME Corp - <img src="/patternfly/img/brand.svg" alt="PatternFly Enterprise Application" />
       </a>
     </div>
   </nav>
@@ -115,6 +115,15 @@
   </div>
 
 <script type="text/javascript">
+var _currentweather_backend_service = 'http://localhost:1337/'; // this is the non-OpenShift default to be used
+
+// check if we got a new backend server, it should be at some FQDN
+if (true) { // TODO this needs do to a sanity check
+  _currentweather_backend_service = "http://currentweather-backend-currentweather.e8ca.engint.openshiftapps.com/";
+}
+
+console.log('CURRENTWEATHER_BACKEND_SERVCIE is at ' + _currentweather_backend_service);
+
 var matchHeights = function() {
   // matchHeight the contents of each .card-pf and then the .card-pf itself
   $(".row-cards-pf > [class*='col'] > .card-pf .card-pf-title").matchHeight();
@@ -128,7 +137,7 @@ var matchHeights = function() {
 var refreshDisplayedData = function() {
   matchHeights();
 
-  $.getJSON('http://localhost:1337/status/Bonn,DE', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Bonn,DE', function (data) {
     $('#weather-1-location').text(data.location);
     $('#weather-1-description').text(data.description);
     $('#weather-1-wind').text(data.wind + " km/h");
@@ -136,7 +145,7 @@ var refreshDisplayedData = function() {
     matchHeights();
   });
 
-  $.getJSON('http://localhost:1337/status/Boston,USA', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Boston,USA', function (data) {
     $('#weather-2-location').text(data.location);
     $('#weather-2-description').text(data.description);
     $('#weather-2-wind').text(data.wind + " km/h");
@@ -144,7 +153,7 @@ var refreshDisplayedData = function() {
     matchHeights();
   });
 
-  $.getJSON('http://localhost:1337/status/Paris,FR', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Paris,FR', function (data) {
     $('#weather-3-location').text(data.location);
     $('#weather-3-description').text(data.description);
     $('#weather-3-wind').text(data.wind + " km/h");
