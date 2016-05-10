@@ -115,11 +115,11 @@
   </div>
 
 <script type="text/javascript">
-var _currentweather_backend_service = 'http://localhost:1337/'; // this is the non-OpenShift default to be used
+var _currentweather_backend_service = 'http://localhost:1337'; // this is the non-OpenShift default to be used
 
 // check if we got a new backend server, it should be at some FQDN
 if (true) { // TODO this needs do to a sanity check
-  _currentweather_backend_service = "http://currentweather-backend-currentweather.e8ca.engint.openshiftapps.com/";
+  _currentweather_backend_service = "http://currentweather-backend-currentweather.e8ca.engint.openshiftapps.com";
 }
 
 console.log('CURRENTWEATHER_BACKEND_SERVCIE is at ' + _currentweather_backend_service);
