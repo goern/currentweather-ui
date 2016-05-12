@@ -147,7 +147,7 @@ var matchHeights = function() {
 var refreshDisplayedData = function() {
   matchHeights();
 
-  $.getJSON(_currentweather_backend_service+'/status/Bonn,DE', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Boston,USA', function (data) {
     $('#weather-1-location').text(data.location);
     $('#weather-1-description').text(data.description);
     $('#weather-1-wind').text(data.wind + " km/h");
@@ -155,7 +155,7 @@ var refreshDisplayedData = function() {
     matchHeights();
   });
 
-  $.getJSON(_currentweather_backend_service+'/status/Boston,USA', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Bonn,DE', function (data) {
     $('#weather-2-location').text(data.location);
     $('#weather-2-description').text(data.description);
     $('#weather-2-wind').text(data.wind + " km/h");
@@ -163,7 +163,7 @@ var refreshDisplayedData = function() {
     matchHeights();
   });
 
-  $.getJSON(_currentweather_backend_service+'/status/Paris,FR', function (data) {
+  $.getJSON(_currentweather_backend_service+'/status/Beijing,CN', function (data) {
     $('#weather-3-location').text(data.location);
     $('#weather-3-description').text(data.description);
     $('#weather-3-wind').text(data.wind + " km/h");
