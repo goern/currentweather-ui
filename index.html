@@ -92,9 +92,11 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div><!-- /row -->
 
-            <!-- /row -->
+            <div class="row">
+              <p>Last update at <span id="updatedAt"></span></p>
+            </div><!-- row -->
 
           </div><!-- /container -->
         </div>
@@ -118,7 +120,8 @@
           </li>
         </ul>
       </div><!-- col -->
-    </div>
+
+    </div><!-- row -->
   </div>
 
 <script type="text/javascript">
@@ -168,6 +171,13 @@ var refreshDisplayedData = function() {
     matchHeights();
   });
 
+  $('#updatedAt').text(Date());
+
+}
+
+var updateTimerCallback = function() {
+  refreshDisplayedData();
+  $('#updatedAt').text(Date());
 }
 
 $("#refresh").click(function() {
@@ -176,6 +186,8 @@ $("#refresh").click(function() {
 
 $(document).ready(function () {
   refreshDisplayedData();
+
+  var intervalID = window.setInterval(updateTimerCallback, 300000);
 });
 </script>
 
