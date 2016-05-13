@@ -13,8 +13,8 @@
 
   <link rel="stylesheet" href="patternfly/css/patternfly.min.css" />
   <link rel="stylesheet" href="patternfly/css/patternfly-additions.min.css" />
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,8 +60,8 @@
                 <h2 id="weather-1-location" class="card-pf-title" style="height: 17px;"></h2>
                 <div class="card-pf-body" style="height: 50px;">
                   <p class="card-pf-aggregate-status-notifications">
-                    <span id="weather-1-description"></span></br>
-                    <!-- todo include icon <span class="pficon pficon-error-circle-o"> --></span><span class="card-pf-aggregate-status-notification" id="weather-1-temperature"></span>
+                    <i id="weather-1-icon"></i> <span id="weather-1-description"></span></br>
+                    <i class="wi wi-thermometer"></i> <span class="card-pf-aggregate-status-notification" id="weather-1-temperature"></span>
                     <span class="card-pf-aggregate-status-notification" id="weather-1-wind"></span>
                   </p>
                 </div>
@@ -73,8 +73,8 @@
                 <h2 id="weather-2-location" class="card-pf-title" style="height: 17px;"> </h2>
                 <div class="card-pf-body" style="height: 50px;">
                   <p class="card-pf-aggregate-status-notifications">
-                    <span id="weather-2-description"></span></br>
-                    <span class="card-pf-aggregate-status-notification" id="weather-2-temperature"></span>
+                    <i id="weather-2-icon"></i> <span id="weather-2-description"></span></br>
+                    <i class="wi wi-thermometer"></i> <span class="card-pf-aggregate-status-notification" id="weather-2-temperature"></span>
                     <span class="card-pf-aggregate-status-notification" id="weather-2-wind"></span>
                   </p>
                 </div>
@@ -86,8 +86,8 @@
                 <h2 id="weather-3-location" class="card-pf-title" style="height: 17px;"></h2>
                 <div class="card-pf-body" style="height: 50px;">
                   <p class="card-pf-aggregate-status-notifications">
-                    <span id="weather-3-description"></span></br>
-                    <span class="card-pf-aggregate-status-notification" id="weather-3-temperature"></span>
+                    <i id="weather-3-icon"></i> <span id="weather-3-description"></span></br>
+                    <i class="wi wi-thermometer"></i> <span class="card-pf-aggregate-status-notification" id="weather-3-temperature"></span>
                     <span class="card-pf-aggregate-status-notification" id="weather-3-wind"></span>
                   </p>
                 </div>
@@ -148,6 +148,7 @@ var refreshDisplayedData = function() {
   matchHeights();
 
   $.getJSON(_currentweather_backend_service+'/status/Boston,USA', function (data) {
+    $('#weather-1-icon').addClass("wi wi-owm-"+data.owm_id);
     $('#weather-1-location').text(data.location);
     $('#weather-1-description').text(data.description);
     $('#weather-1-wind').text(data.wind + " km/h");
@@ -156,6 +157,7 @@ var refreshDisplayedData = function() {
   });
 
   $.getJSON(_currentweather_backend_service+'/status/Bonn,DE', function (data) {
+    $('#weather-2-icon').addClass("wi wi-owm-"+data.owm_id);
     $('#weather-2-location').text(data.location);
     $('#weather-2-description').text(data.description);
     $('#weather-2-wind').text(data.wind + " km/h");
@@ -164,6 +166,7 @@ var refreshDisplayedData = function() {
   });
 
   $.getJSON(_currentweather_backend_service+'/status/Beijing,CN', function (data) {
+    $('#weather-3-icon').addClass("wi wi-owm-"+data.owm_id);
     $('#weather-3-location').text(data.location);
     $('#weather-3-description').text(data.description);
     $('#weather-3-wind').text(data.wind + " km/h");
