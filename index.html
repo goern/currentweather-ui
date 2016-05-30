@@ -96,6 +96,7 @@
 
             <div class="row">
               <p>Last update at <span id="updatedAt"></span></p>
+              <p><span id="runtimeInfo"></span></p>
             </div><!-- row -->
 
           </div><!-- /container -->
@@ -131,8 +132,6 @@ var _currentweather_backend_service = 'http://localhost:1337'; // this is the no
 if (true) { // TODO this needs do to a sanity check
   _currentweather_backend_service = "http://backend-currentweather.e8ca.engint.openshiftapps.com"; // FIXME this is hardcoded, no good!
 }
-
-console.log('CURRENTWEATHER_BACKEND_SERVCIE is at ' + _currentweather_backend_service);
 
 var matchHeights = function() {
   // matchHeight the contents of each .card-pf and then the .card-pf itself
@@ -176,6 +175,9 @@ var refreshDisplayedData = function() {
 
   $('#updatedAt').text(Date());
 
+  $.getJSON(_currentweather_backend_service+'/v1/info', function(runtimeInfoData) {
+      $('#runtimeInfo').text(runtimeInfoData.runtimeVersion.node);
+  });
 }
 
 var updateTimerCallback = function() {
