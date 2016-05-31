@@ -177,7 +177,7 @@ var refreshDisplayedData = function() {
 
   $.getJSON(_currentweather_backend_service+'/v1/info', function(runtimeInfoData) {
       $('#runtimeInfo').text("NodeJS " + runtimeInfoData.runtimeVersion.node +
-                              "V8 " + runtimeInfoData.runtimeVersion.v8
+                              " V8 " + runtimeInfoData.runtimeVersion.v8
       );
   });
 }
