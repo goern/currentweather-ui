@@ -9,10 +9,10 @@
   <title>ACME Corp currentweather!</title>
 
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script src="patternfly/js/patternfly.min.js"></script>
+  <script src="/patternfly/js/patternfly.min.js"></script>
 
-  <link rel="stylesheet" href="patternfly/css/patternfly.min.css" />
-  <link rel="stylesheet" href="patternfly/css/patternfly-additions.min.css" />
+  <link rel="stylesheet" href="/patternfly/css/patternfly.min.css" />
+  <link rel="stylesheet" href="/patternfly/css/patternfly-additions.min.css" />
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.6.0/jquery.matchHeight-min.js"></script>
 
@@ -23,8 +23,8 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <link rel="stylesheet" href="weather-icons/css/weather-icons.min.css" />
-  <link rel="stylesheet" href="weather-icons/css/weather-icons-wind.min.css" />
+  <link rel="stylesheet" href="/weather-icons/css/weather-icons.min.css" />
+  <link rel="stylesheet" href="/weather-icons/css/weather-icons-wind.min.css" />
 </head>
 
 <body class="cards-pf">
@@ -192,6 +192,15 @@ $("#refresh").click(function() {
 });
 
 $(document).ready(function () {
+  var geturl;
+  geturl = $.ajax({
+     type: "HEAD",
+     url: _currentweather_backend_service,
+  });
+
+  var serverVersion = geturl.getResponseHeader('Server');
+  console.log(serverVersion);
+
   refreshDisplayedData();
 
   var intervalID = window.setInterval(updateTimerCallback, 300000);
