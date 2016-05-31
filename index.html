@@ -126,6 +126,7 @@
   </div>
 
 <script type="text/javascript">
+var serverVersion = '';
 var _currentweather_backend_service = 'http://localhost:1337'; // this is the non-OpenShift default to be used
 
 // check if we got a new backend server, it should be at some FQDN
@@ -176,8 +177,8 @@ var refreshDisplayedData = function() {
   $('#updatedAt').text(Date());
 
   $.getJSON(_currentweather_backend_service+'/v1/info', function(runtimeInfoData) {
-      $('#runtimeInfo').text("NodeJS " + runtimeInfoData.runtimeVersion.node +
-                              " V8 " + runtimeInfoData.runtimeVersion.v8
+      $('#runtimeInfo').text("nginx " + serverVersion + ", NodeJS " + runtimeInfoData.runtimeVersion.node +
+                              ", V8 " + runtimeInfoData.runtimeVersion.v8
       );
   });
 }
@@ -193,13 +194,15 @@ $("#refresh").click(function() {
 
 $(document).ready(function () {
   var geturl;
-  geturl = $.ajax({
-     type: "HEAD",
-     url: _currentweather_backend_service,
-  });
 
-  var serverVersion = geturl.getResponseHeader('Server');
-  console.log(serverVersion);
+  $.ajax({
+    type: "GET",
+    url: _currentweather_backend_service,
+    success: function(data, status, xhr) {
+      serverVersion = xhr.getResponseHeader('Server');
+      console.log(serverVersion);
+    }
+  });
 
   refreshDisplayedData();
 
