@@ -131,7 +131,7 @@ var _currentweather_backend_service = 'http://localhost:1337'; // this is the no
 
 // check if we got a new backend server, it should be at some FQDN
 if (true) { // TODO this needs do to a sanity check
-  _currentweather_backend_service = "http://backend-currentweather.e8ca.engint.openshiftapps.com"; // FIXME this is hardcoded, no good!
+  _currentweather_backend_service = "http://backend-currentweather.192.168.99.100.xip.io"; // FIXME this is hardcoded, no good!
 }
 
 var matchHeights = function() {
@@ -178,7 +178,7 @@ var refreshDisplayedData = function() {
 
   $.getJSON(_currentweather_backend_service+'/v1/info', function(runtimeInfoData) {
       $('#runtimeInfo').text("nginx " + serverVersion + ", NodeJS " + runtimeInfoData.runtimeVersion.node +
-                              ", V8 " + runtimeInfoData.runtimeVersion.v8
+                              ", V8 " + runtimeInfoData.runtimeVersion.v8 + ", served by host: " + runtimeInfoData.backendHostname
       );
   });
 }
@@ -194,15 +194,6 @@ $("#refresh").click(function() {
 
 $(document).ready(function () {
   var geturl;
-
-  $.ajax({
-    type: "GET",
-    url: _currentweather_backend_service,
-    success: function(data, status, xhr) {
-      serverVersion = xhr.getResponseHeader('Server');
-      console.log(serverVersion);
-    }
-  });
 
   refreshDisplayedData();
 
